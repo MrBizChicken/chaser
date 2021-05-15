@@ -7,6 +7,8 @@ class Player(main_block.Main_block):
 
     def update(self):
         self.input()
+        self.chase()
+        pygame.mouse.get_pos()
 
     def input(self):
         keys = pygame.key.get_pressed()
@@ -25,3 +27,20 @@ class Player(main_block.Main_block):
         # Right
         if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
             self.rect = self.rect.move(self.speed, 0)
+
+
+
+    def chase(self):
+        mx, my = pygame.mouse.get_pos()
+
+        if  my  > self.rect.y:
+            self.rect = self.rect.move(0, self.speed)
+
+        if  my < self.rect.y:
+            self.rect = self.rect.move(0, -self.speed)
+
+        if mx  > self.rect.x:
+            self.rect = self.rect.move(self.speed, 0)
+
+        if mx < self.rect.x:
+            self.rect = self.rect.move(-self.speed, 0)
